@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=640, initial-scale=1.0">
+    <title>Welcome to BLACKJACK World</title>
+</head>
+<style>
+    button{
+        border: none;
+        background: none;
+    }
+    a{ 
+        position: relative;  
+        text-decoration:none ;
+        color: black;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        font-size: 25pt;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+    a:after{
+        content: "";
+        position:absolute;
+        background-color:rgb(202, 5, 5);
+        height: 3px;
+        width: 0;
+        left: 0;
+        bottom: -10px;
+
+    }
+    a:hover::after{
+        width: 100%;
+    }
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    article{
+        background-color:#228800 ;
+        background-repeat: no-repeat;
+        width: 589px;
+        height: 510px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1{
+        margin-top: 150px;
+        color: black;
+        font-family:serif;
+        font-size: 18pt;
+    }
+
+    h2{
+        color: black;
+        font-family:serif;
+        font-size: 18pt;
+    }
+
+    span{
+        color: rgb(202, 5, 5);
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        font-weight: bolder;
+        font-size: 50pt;
+        -webkit-text-stroke: 2.5px black;
+        
+    ;
+    }
+
+</style>
+<body>
+    <main>
+    <article>
+        <div><h1>Welcome to</h1></div>
+        <div><span>BLACKJACK</span></div>
+        <div><h2>World</h2></div>
+        <button><a href="game.html">START</a></button>
+    </article>
+    </main>
+</body>
+</html>

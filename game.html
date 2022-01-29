@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=640, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cardsinfo{
+            background-color: rgb(24, 153, 24);
+            width: 800px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+
+        }
+        #dcardspic{
+            background-color: white;
+            width: 150px;
+            height: 200px;
+            margin: 3px;
+            padding: 3px;
+        }
+        #pcardspic{
+            background-color: white;
+            width: 150px;
+            height: 200px;
+            margin: 3px;
+            padding: 3px;
+        }
+        #suitcorner>img{
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <h1>Welcome to Blackjack World</h1>
+    <article>
+        <section class="display-desktop">
+    <div>Dealer's Cards:
+        <div id="cardsinfo">
+                <div id="dcardspic">
+                    <div id="suitcorner"><img src="" alt=""></div>
+                    <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+                </div>
+                <div id="dcardspic">
+                    <div id="suitcorner"><img src="" alt=""></div>
+                    <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+                </div>
+                <div id="dcardspic">
+                    <div id="suitcorner"><img src="" alt=""></div>
+                    <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+                </div>
+                <div id="dcardspic">
+                    <div id="suitcorner"><img src="" alt=""></div>
+                    <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+                </div>
+                <div id="dcardspic">
+                    <div id="suitcorner"><img src="" alt=""></div>
+                    <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>Player's Cards:
+        <div id="cardsinfo">
+            <div id="pcardspic">
+                <div id="suitcorner"><img src="" alt=""></div>
+                <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+            </div>
+            <div id="pcardspic">
+                <div id="suitcorner"><img src="" alt=""></div>
+                <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+            </div>
+            <div id="pcardspic">
+                <div id="suitcorner"><img src="" alt=""></div>
+                <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+            </div>
+            <div id="pcardspic">
+                <div id="suitcorner"><img src="" alt=""></div>
+                <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+            </div>
+            <div id="pcardspic">
+                <div id="suitcorner"><img src="" alt=""></div>
+                <span id="Pokervalue"></span><div id="suitcenter"><img src="" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+    <p id="Playercardsinfo"></p>
+    <p id="Dealerstatus"></p>
+    <p id="Gamestatus"></p>
+    <input type="button" value="Hit" id="hit">
+    <input type="button" value="Stay" id="stay">
+    <input type="button" value="Game Over" id="gameover" onclick=BacktoGamestart()>
+    <script>
+        //Pokercard only show when something in the logic breaks and Spade is the first suit.
+       let Dealercardsinfo=document.getElementById("Dealercardsinfo");
+       let Playercardsinfo=document.getElementById("Playercardsinfo");
+       let Dealerstatus=document.getElementById("Dealerstatus");
+       let Gamestatus=document.getElementById("Gamestatus");
+       let hitbutton=document.getElementById("hit");
+       let staybutton=document.getElementById("stay");
+       let pcardspic=document.querySelectorAll("#pcardspic")
+       let dcardspic=document.querySelectorAll("#dcardspic")
+       let suitcorner=document.getElementById("suitcorner")
+       let suitcenter=document.getElementById("suitcenter")
+       let Pokervalue=document.getElementById("Pokervalue")
+       let gameoverbutton=document.getElementById("gameover")
+           playercards=[];
+           dealercards=[];
+           playercardstotal=0;
+           dealercardstotal=0;
+           gameover=false
+           
+           gameoverbutton.style.display="none";
+        
+
+        // dcardspic[2].style.display='block';
+        
+
+        const cards=[1,2,3,4,5,6,7,8,9,10,11];
+        let suits=['Hearts','Clubs','Diamonds','Spades'];
+        let values=['A','K','Q','J','10','9','8','7','6','5','4','3','2']
+        let deck=createDeck()
+        
+        function Newgameshowcards(){
+            for(let i=0;i<3;i++){
+            pcardspic[i].style.display='none';
+            dcardspic[i].style.display="none";
+        }
+
+        }
+        
+
+        function createDeck(){
+            let deck =[]
+            for(let suitIdx=0; suitIdx<suits.length; suitIdx++){
+                for(let valueIdx=0; valueIdx<values.length; valueIdx++){
+                    let card={
+                        suit: suits[suitIdx],
+                        value: values[valueIdx]
+                    }
+                    deck.push(card);
+                }
+            }
+            return deck;
+        }
+
+        // function dealercardshow(){
+        //     for(let i=0;i<dealercards.length;i++){
+        //         if(dealercards[i].suit=="heart")
+        //     }
+        // }
+
+        function defineNum(tmp){
+            switch(tmp.value){
+                case 'A':
+                    return 1;
+                case 'K':
+                    return 13;
+                case 'Q':
+                    return 12;
+                case 'J':
+                    return 11;
+                case '10':
+                    return 10;
+                case '9':
+                    return 9;
+                case '8':
+                    return 8;
+                case '7':
+                    return 7;
+                case '6':
+                    return 6;
+                case '5':
+                    return 5;
+                case '4':
+                    return 4;
+                case '3':
+                    return 3;
+                case '2':
+                    return 2;
+            }
+
+        }
+
+
+        console.log(cards.length);
+        console.log(deck.length);
+
+        function getcardstring(tmp){
+            return tmp.suit + tmp.value;
+        }
+
+        function ShowPoker(tmp){
+            // if(tmp.value!=='K'||'Q'||'J'){
+                Pokervalue.innerText=tmp.value
+                suitcorner.innerHTML=`<img src="images/${tmp.suit}.png"  alt="${tmp.suit}">`
+                suitcenter.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            // }else if(tmp.value=='K'){
+            //     Pokervalue.innerText=tmp.value
+            //     suitcorner.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            //     suitcenter.innerHTML=`<img src="images/King.png" alt="King">`
+            // }else if(tmp.value=='Q'){
+            //     Pokervalue.innerText=tmp.value
+            //     suitcorner.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            //     suitcenter.innerHTML=`<img src="images/Queen.png" alt="Queen">`
+            // }else if(tmp.value=='J'){
+            //     Pokervalue.innerText=tmp.value
+            //     suitcorner.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            //     suitcenter.innerHTML=`<img src="images/Jack.png" alt="Jack">`
+            // }
+            // else{
+            //     Pokervalue.innerText=tmp.value
+            //     suitcorner.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            //     suitcenter.innerHTML=`<img src="images/${tmp.suit}.png" alt="${tmp.suit}">`
+            // }
+            
+            return suitcorner.innerHTML
+            return suitcenter.innerHTML
+            return Pokervalue.innerText
+
+        }
+
+        function DrawNewDeckcards(){
+            for(let i=0;i<2;i++){
+                let Dcard=1+Math.trunc(Math.random()*deck.length)
+                let tmp=deck[Dcard]
+                dealercards.push(getcardstring(tmp))
+                dealercardstotal+=defineNum(tmp);
+                ShowPoker(tmp)
+            }
+            for(let i=0;i<2;i++){
+                let Pcard=1+Math.trunc(Math.random()*deck.length)
+                let tmp=deck[Pcard]
+                playercards.push(getcardstring(tmp))
+                playercardstotal+=defineNum(tmp);
+                ShowPoker(tmp)
+        }
+    }
+
+
+
+        function Newgamedeck(){
+            DrawNewDeckcards()
+            console.log("dealercards:"+dealercards)
+            console.log("dealertotal:"+dealercardstotal)
+            console.log("playercards:"+playercards)
+
+            // Dealercardsinfo.innerText=dealercardstotal
+            Playercardsinfo.innerHTML=`<p id="Playercardsinfo">playercards:${playercards}<br/>playercardstotal:${playercardstotal}<p>`
+            
+            checkgamestatus();
+            Newgameshowcards()
+            return Dealercardsinfo
+            return Playercardsinfo
+
+        }
+
+        function buttonChange(){
+                hitbutton.style.display="none"
+                staybutton.style.display="none";
+                gameoverbutton.style.display="inline"
+            
+        }
+
+        function checkgamestatus(){
+            if(playercardstotal==21){
+                gameover=true
+                console.log("You Win!")
+                Gamestatus.innerText="You Win!";
+                buttonChange()
+
+            }else if(dealercardstotal==21){
+                gameover=true
+                console.log("Dealer Win!")
+                Gamestatus.innerText="Dealer Win!";
+                buttonChange()
+
+            }else if(dealercardstotal>21){
+                gameover=true
+                console.log("You Win!")
+                Gamestatus.innerText="You Win!";
+                buttonChange()
+            }else if(playercardstotal>21){
+                gameover=true
+                console.log("Dealer Win!")
+                Gamestatus.innerText="Dealer Win!";
+                buttonChange()
+            }else{
+                gameover=false
+                console.log("Game Continues");
+            }
+ 
+        }
+
+        function callEndgame(){
+            if(playercardstotal>dealercardstotal<=21){
+                gameover=true
+                Gamestatus.innerText="Dealer Win!";
+                console.log('playercardstotal>dealercardstotal<=21')
+                buttonChange()
+                //calculation breaks when dealer chose hit first and then stay, no matter the result it will show Dealer win
+            }else if(dealercardstotal==playercardstotal){
+                gameover=true
+                Gamestatus.innerText="Tie";
+                buttonChange()
+            }else if(dealercardstotal>playercardstotal<=21){
+                gameover=true
+                Gamestatus.innerText="You Win!";
+                buttonChange()
+            }
+            else{
+                gameover=true
+                Gamestatus.innerText="You Win!";
+                buttonChange()
+            }
+            
+        }
+        function DealergetNewcards(){
+            if (dealercardstotal<=15){
+                let Dcard=1+Math.trunc(Math.random()*deck.length);
+                let tmp=deck[Dcard]
+                dealercards.push(getcardstring(tmp));
+                dealercardstotal+=defineNum(tmp);
+                ShowPoker(tmp)
+                console.log("Dealer chose Hit"+dealercards+","+dealercardstotal)
+                Dealerstatus.innerText="Dealer chose Hit"
+            }else{
+                Dealerstatus.innerText="Dealer chose Stay"
+               }
+            return dealercardstotal
+            return dealercards
+            return Dealerstatus.innerText
+        }
+
+        hitbutton.addEventListener('click',function(){
+            let Pcard=1+Math.trunc(Math.random()*deck.length);
+            let tmp=deck[Pcard]
+                playercards.push(getcardstring(tmp));
+                playercardstotal+=defineNum(tmp);
+                // ShowPoker(tmp)
+                console.log(playercards+","+playercardstotal);
+                // let Newplayercards=playercards;
+                //     Newplayercardstotal=playercardstotal;
+                // Playercardsinfo.innerHTML=`<p id="Playercardsinfo">playercards:${Newplayercards}<br/>playercardstotal:${Newplayercardstotal}<p>`
+                Playercardsinfo.innerHTML=`<p id="Playercardsinfo">playercards:${playercards}<br/>playercardstotal:${playercardstotal}<p>`
+            DealergetNewcards()
+            checkgamestatus()
+        });
+
+        staybutton.addEventListener('click',function(){
+            DealergetNewcards()
+            if(Dealerstatus.innerText='Dealer chose Stay'){
+                callEndgame()
+
+            }else{
+                checkgamestatus()
+            }
+            
+        })
+
+        function BacktoGamestart(){
+            const url=window.location.href.replace("game.html","gamestart.html");
+            window.location.href=url;
+        };
+
+        window.onload=Newgamedeck;
+
+    </script>
+    </section>
+    </article>
+    </main>
+</body>
+</html>
